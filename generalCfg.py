@@ -1,9 +1,12 @@
-from new_tool.codeforces.config.cfCfg import CfConfig
-from new_tool.system.config.apiCfg import ApiConfig
-from new_tool.system.config.runCfg import RunConfig
+from codeforces.config.cfCfg import CfConfig
+from codeforces.config.apiCfg import ApiConfig
+from system.config.runCfg import RunConfig
+from system.structures.dummyStruct import DummyStruct
 
-class GeneralConfig:
+
+class GeneralConfig(DummyStruct):
     def __init__(self) -> None:
+        super().__init__()
         self.cfConfig = CfConfig()
         self.apiConfig = ApiConfig()
         self.runConfig = RunConfig()

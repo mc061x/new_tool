@@ -1,5 +1,9 @@
-class RunConfig:
+from system.structures.dummyStruct import DummyStruct
+
+
+class RunConfig(DummyStruct):
     def __init__(self) -> None:
+        super().__init__()
         self.TimeLimit = 2
         self.MemoryLimit = 64 * 1024
         self.InputFilePath = ''

@@ -1,8 +1,9 @@
 import subprocess, time, psutil
 
-from new_tool.exceptions import *
-from new_tool.system.config import RunConfig
-from new_tool.system.structures.runFileResult import RunFileResult
+from exceptions import *
+from system.config.runCfg import RunConfig
+from system.structures.runFileResult import RunFileResult
+
 
 class FileRunner:
     def __init__(self, cfg: RunConfig, file_path: str) -> None:
@@ -15,7 +16,7 @@ class FileRunner:
         buildCommand = f"{self.config.BuildCommand} {self.config.BuildArgs}"
         with subprocess.Popen(buildCommand, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True) as proc:
             errors = proc.stdout.read().decode().splitlines()
-        if (errors != []):
+        if errors:
             for line in errors:
                 print(line)
             return 0
@@ -26,13 +27,13 @@ class FileRunner:
         for proc in process.children(recursive=True):
             proc.kill()
         process.kill()
-    
+
     def getMemory(self, process: psutil.Process):
         RAM = process.memory_info().rss
         for child in process.children(recursive=True):
             RAM += child.memory_info().rss
         return RAM
-    
+
     def getTime(self, timeStart: float):
         return time.time() - timeStart
 

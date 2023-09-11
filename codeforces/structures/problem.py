@@ -1,4 +1,4 @@
-from codeforces.structures.dummyStruct import DummyStruct
+from system.structures.dummyStruct import DummyStruct
 
 
 class Problem(DummyStruct):

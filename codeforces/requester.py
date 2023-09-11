@@ -17,10 +17,10 @@ class Requester:
         return HacksResult(self.api.request(method='contest.hacks?', args=args))
 
     def rated_list(self, args: dict) -> RatedListResult:
-        return RatedListResult(self.api.request(method='contest.ratedList', args=args))
+        return RatedListResult(self.api.request(method='contest.ratedList?', args=args))
 
-    def ratings(self, args: dict) -> RatingResult:
-        return
+    def rating(self, args: dict) -> RatingResult:
+        return RatingResult(self.api.request(method='user.rating?', args=args))
 
     def to_dict(self, json: dict):
         pass

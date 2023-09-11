@@ -1,6 +1,6 @@
 from codeforces.structures.problem import Problem
 from codeforces.structures.party import Party
-from codeforces.structures.dummyStruct import DummyStruct
+from system.structures.dummyStruct import DummyStruct
 
 
 class Submission(DummyStruct):
@@ -19,5 +19,3 @@ class Submission(DummyStruct):
         self.timeConsumedMillis = int()
         self.memoryConsumedBytes = int()
         self.points = int()
-
-        self.recursion_fill = ['problem', 'author']

@@ -1,28 +1,26 @@
 class DummyStruct:
     def __init__(self) -> None:
-        self.recursion_fill = list()
-        self.list_fill = list()
         pass
 
-    def from_json(self, json: dict) -> None:
-        attr_list, key_list = self.__dict__.keys(), json.keys()
+    def from_json(self, object: list | dict) -> None:
+        attr_list, key_list = self.__dict__.keys(), object.keys()
         for attr in attr_list:
             if attr in key_list:
-                if attr in self.list_fill:
+                try:
                     new_value = getattr(self, attr)
-                    new_value.fill_list(json[attr])
+                    new_value.from_json(object[attr])
                     setattr(self, attr, new_value)
-                elif attr in self.recursion_fill:
-                    new_value = getattr(self, attr)
-                    new_value.from_json(json[attr])
-                    setattr(self, attr, new_value)
-                else:
-                    setattr(self, attr, json[attr])
+                except AttributeError:
+                    setattr(self, attr, object[attr])
 
-    def to_json(self) -> dict:
+    def to_json(self) -> list | dict:
         attr_list = self.__dict__.keys()
 
         result = dict()
-        # for attr in attr_list:
-
+        for attr in attr_list:
+            value = getattr(self, attr)
+            try:
+                result[attr] = value.to_json()
+            except AttributeError:
+                result[attr] = value
         return result

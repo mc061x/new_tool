@@ -3,7 +3,7 @@ from codeforces.requester import Requester
 from codeforces.structures.hacks import Hack
 from codeforces.structures.member import Member
 from generalCfg import GeneralConfig
-from system.structures.typelist import my_list
+from system.structures.typelist import MyList
 from exceptions import *
 
 
@@ -12,7 +12,7 @@ def assert_handle_not_empty(cfg: GeneralConfig):
         raise HandleNotSetException
 
 
-def is_being_targeted(cfg: GeneralConfig) -> my_list(Hack):
+def is_being_targeted(cfg: GeneralConfig) -> MyList(Hack):
     assert_handle_not_empty(cfg=cfg)
 
     current_api = API(api_cfg=cfg.apiConfig)
@@ -22,7 +22,7 @@ def is_being_targeted(cfg: GeneralConfig) -> my_list(Hack):
         'contestId': cfg.cfConfig.current_contest
     }).hack_list.list
 
-    result = my_list(Hack)
+    result = MyList(Hack)
 
     current_hack: Hack
     for current_hack in hacks:  #
@@ -34,7 +34,7 @@ def is_being_targeted(cfg: GeneralConfig) -> my_list(Hack):
     return result
 
 
-def my_targets(cfg: GeneralConfig) -> my_list(Hack):
+def my_targets(cfg: GeneralConfig) -> MyList(Hack):
     assert_handle_not_empty(cfg=cfg)
 
     current_api = API(api_cfg=cfg.apiConfig)
@@ -44,7 +44,7 @@ def my_targets(cfg: GeneralConfig) -> my_list(Hack):
         'contestId': cfg.cfConfig.current_contest
     }).hack_list.list
 
-    result = my_list(Hack)
+    result = MyList(Hack)
 
     current_hack: Hack
     for current_hack in hacks:  #

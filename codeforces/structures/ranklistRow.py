@@ -1,6 +1,6 @@
 from codeforces.structures.party import Party
-from codeforces.structures.dummyStruct import DummyStruct
-from system.structures.typelist import my_list
+from system.structures.dummyStruct import DummyStruct
+from system.structures.typelist import MyList
 from codeforces.structures.problemResult import ProblemResult
 
 
@@ -13,8 +13,6 @@ class RanklistRow(DummyStruct):
         self.penalty = int()
         self.successfulHackCount = int()
         self.unsuccessfulHackCount = int()
-        self.problemResults = my_list(ProblemResult)
+        self.problemResults = MyList(ProblemResult)
         self.lastSubmissionTimeSeconds = int()
 
-        self.recursion_fill = ['party']
-        self.list_fill = ['problemResults']

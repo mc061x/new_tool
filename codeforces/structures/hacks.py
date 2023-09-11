@@ -1,6 +1,6 @@
 from codeforces.structures.party import Party
 from codeforces.structures.problem import Problem
-from codeforces.structures.dummyStruct import DummyStruct
+from system.structures.dummyStruct import DummyStruct
 
 
 class Hack(DummyStruct):
@@ -14,5 +14,3 @@ class Hack(DummyStruct):
         self.problem = Problem()
         self.test = str()
         self.judgeProtocol = dict()
-
-        self.recursion_fill = ['hacker', 'defender', 'problem']
