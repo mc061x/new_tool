@@ -4,7 +4,7 @@ class DummyStruct:
         self.list_fill = list()
         pass
 
-    def from_json(self, json: dict):
+    def from_json(self, json: dict) -> None:
         attr_list, key_list = self.__dict__.keys(), json.keys()
         for attr in attr_list:
             if attr in key_list:
@@ -18,3 +18,11 @@ class DummyStruct:
                     setattr(self, attr, new_value)
                 else:
                     setattr(self, attr, json[attr])
+
+    def to_json(self) -> dict:
+        attr_list = self.__dict__.keys()
+
+        result = dict()
+        # for attr in attr_list:
+
+        return result
