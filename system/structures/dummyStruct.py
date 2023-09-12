@@ -19,8 +19,8 @@ class DummyStruct:
         result = dict()
         for attr in attr_list:
             value = getattr(self, attr)
-            try:
+            if hasattr(value, 'to_json'):
                 result[attr] = value.to_json()
-            except AttributeError:
+            else:
                 result[attr] = value
         return result

@@ -1,11 +1,12 @@
-from system.structures.dummyStruct import DummyStruct
+from system.structures.configStruct import ConfigStruct
 
 
-class RunConfig(DummyStruct):
+class RunConfig(ConfigStruct):
     def __init__(self) -> None:
         super().__init__()
-        self.TimeLimit = 2
-        self.MemoryLimit = 64 * 1024
+        self.TimeLimit = 2.0
+        self.MemoryLimit = 256 * 1024
+        self.output_file_size_limit = 16 * 1024
         self.InputFilePath = ''
         self.OutputFilePath = ''
 
@@ -14,7 +15,8 @@ class RunConfig(DummyStruct):
 
         self.RunCommand = f'./$FILENAME.out'
         self.RunArgs = ''
-        self.clearExecutable = True
+
+        self.CleanupCommand = f'rm $FILENAME.out'
 
         self.RunnerPollTime = 0.05
     

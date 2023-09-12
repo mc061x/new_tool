@@ -1,7 +1,7 @@
-from system.structures.dummyStruct import DummyStruct
+from system.structures.configStruct import ConfigStruct
 
 
-class ApiConfig(DummyStruct):
+class ApiConfig(ConfigStruct):
     def __init__(self) -> None:
         super().__init__()
         self.key = ''

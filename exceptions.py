@@ -52,3 +52,27 @@ class UndefinedAPIErrorException(Exception):
 
     def __init__(self, *args: object) -> None:
         super().__init__(*args)
+
+
+class ConfigAttributeNotFoundException(Exception):
+    """Called when user tries to modify a non-existing attribute"""
+
+    def __init__(self, *args: object) -> None:
+        super().__init__(*args)
+
+
+class WrongAttributeTypeException(Exception):
+    """Called when user tries to modify an attribute, but the new value's type is incorrect"""
+
+    def __init__(self, *args: object):
+        super.__init__(*args)
+
+
+class FileNotFoundException(Exception):
+    """Called when the program cannot find the file that the user tries to access"""
+
+    def __init__(self, *args: object):
+        super().__init__(*args)
+
+class OutputFileTooLargeException(Exception):
+    """Called when the output file exceeded the set limit"""
