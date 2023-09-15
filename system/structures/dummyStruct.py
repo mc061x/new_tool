@@ -1,3 +1,6 @@
+from copy import deepcopy
+
+
 class DummyStruct:
     def __init__(self) -> None:
         pass
@@ -6,12 +9,12 @@ class DummyStruct:
         attr_list, key_list = self.__dict__.keys(), object.keys()
         for attr in attr_list:
             if attr in key_list:
-                try:
+                if hasattr(getattr(self, attr), 'to_json'):
                     new_value = getattr(self, attr)
-                    new_value.from_json(object[attr])
+                    new_value.from_json(deepcopy(object[attr]))
                     setattr(self, attr, new_value)
-                except AttributeError:
-                    setattr(self, attr, object[attr])
+                else:
+                    setattr(self, attr, deepcopy(object[attr]))
 
     def to_json(self) -> list | dict:
         attr_list = self.__dict__.keys()

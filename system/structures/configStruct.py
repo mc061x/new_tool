@@ -1,17 +1,19 @@
 from system.structures.dummyStruct import DummyStruct
 from exceptions import *
 
+
 def convert(new_value, old_value) -> any:
     if type(old_value) == list:
         result = list()
         for element in new_value.split():
             result.append(element.strip())
         return result
-    
+
     try:
         return type(old_value)(new_value)
     except ValueError:
         raise WrongAttributeTypeException
+
 
 class ConfigStruct(DummyStruct):
     def __init__(self):

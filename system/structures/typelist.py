@@ -1,4 +1,5 @@
 from system.structures.dummyStruct import DummyStruct
+from copy import deepcopy
 
 
 class MyList(DummyStruct):
@@ -8,11 +9,12 @@ class MyList(DummyStruct):
         self.type = object
 
     def from_json(self, array: list) -> None:
+        self.list = list()
         try:
             for obj in array:
                 value = self.type()
-                value.from_json(object=obj)
-                self.list.append(value)
+                value.from_json(object=deepcopy(obj))
+                self.list.append(deepcopy(value))
         except AttributeError:
             self.list = array
 
@@ -20,7 +22,7 @@ class MyList(DummyStruct):
         result = list()
         try:
             for obj in self.list:
-                result.append(obj.to_json())
+                result.append(deepcopy(obj.to_json()))
         except AttributeError:
             result = self.list
         return result

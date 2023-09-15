@@ -76,3 +76,18 @@ class FileNotFoundException(Exception):
 
 class OutputFileTooLargeException(Exception):
     """Called when the output file exceeded the set limit"""
+
+    def __init__(self, *args: object) -> None:
+        super().__init__(*args)
+
+class ConfigNotFoundException(Exception):
+    """Called when user tries to access an undefined config option"""
+
+    def __init__(self, *args: object) -> None:
+        super().__init__(*args)
+
+class CannotLeaveEmptyConfigListException(Exception):
+    """Called when user tries to delete last config option"""
+
+    def __init__(self, *args: object) -> None:
+        super().__init__(*args)

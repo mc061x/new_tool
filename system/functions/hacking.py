@@ -2,7 +2,7 @@ from codeforces.API import API
 from codeforces.requester import Requester
 from codeforces.structures.hacks import Hack
 from codeforces.structures.member import Member
-from generalCfg import GeneralConfig
+from config.generalCfg import GeneralConfig
 from system.structures.typelist import MyList
 from exceptions import *
 
@@ -25,7 +25,7 @@ def is_being_targeted(cfg: GeneralConfig) -> MyList(Hack):
     result = MyList(Hack)
 
     current_hack: Hack
-    for current_hack in hacks:  #
+    for current_hack in hacks:
         member: Member
         for member in current_hack.defender.members.list:
             if member.handle == cfg.cfConfig.handle:

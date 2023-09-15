@@ -1,7 +1,7 @@
 from system.structures.configStruct import ConfigStruct
 
 
-class RunConfig(ConfigStruct):
+class RunSettings(ConfigStruct):
     def __init__(self) -> None:
         super().__init__()
         self.TimeLimit = 2.0

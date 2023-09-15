@@ -1,6 +1,6 @@
 import requests, urllib.parse
 from exceptions import *
-from codeforces.config.apiCfg import ApiConfig
+from config.apiCfg import ApiConfig
 
 
 class API:

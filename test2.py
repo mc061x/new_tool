@@ -1,0 +1,1 @@
+print('I ran o_O', file=open('logs/log.txt', 'w'))

@@ -1,7 +1,7 @@
 import subprocess, time, psutil, os, sys
 
 from exceptions import *
-from system.config.runCfg import RunConfig
+from system.config.runSettings import RunSettings
 from system.structures.runFileResult import RunFileResult
 from system.structures.buildResult import BuildResult
 
@@ -23,16 +23,20 @@ def get_memory(process: psutil.Process):
         RAM += child.memory_info().rss
     return RAM
 
+
 def get_outfile_size(path_to_file: str):
     return os.path.getsize(path_to_file)
 
 
 class FileRunner:
-    def __init__(self, cfg: RunConfig, file_path: str) -> None:
+    def __init__(self, cfg: RunSettings, file_path: str) -> None:
         self.config = cfg
         self.config.format_commands('$FILENAME', file_path)
         self.config.format_run_command()
         self.path_to_file = file_path
+
+    def check_for_outfile_usage(self):
+        return self.config.OutputFilePath != ''
 
     def build(self) -> BuildResult:
         buildCommand = f"{self.config.BuildCommand} {self.config.BuildArgs}"
@@ -44,8 +48,8 @@ class FileRunner:
             return BuildResult(success=0, errors=errors, time=timeEnd - timeStart)
         return BuildResult(success=1, errors=[], time=timeEnd - timeStart)
 
-    def run(self) -> RunFileResult:
-        runCommand = f"ulimit -s {2 * self.config.MemoryLimit} && ulimit -v {2 * self.config.MemoryLimit} && {self.config.RunCommand} {self.config.RunArgs}"
+    def run_unix(self) -> RunFileResult:
+        runCommand = f"ulimit -s {10 * self.config.MemoryLimit} && ulimit -v {10 * self.config.MemoryLimit} && {self.config.RunCommand} {self.config.RunArgs}"
         proc = subprocess.Popen(runCommand, shell=True, stderr=subprocess.PIPE)
         currentTime, timeStart, MAX_RAM = 0, time.perf_counter(), 0
         while proc.poll() is None:
@@ -53,18 +57,23 @@ class FileRunner:
             try:
                 p = psutil.Process(proc.pid)
                 MAX_RAM = max(MAX_RAM, get_memory(process=p))
-                if MAX_RAM >= self.config.MemoryLimit * 1024:
+                if self.config.MemoryLimit != 0 and MAX_RAM >= self.config.MemoryLimit * 1024:
                     kill(proc.pid)
                     raise MemoryLimitExceededException
-                if currentTime - timeStart > self.config.TimeLimit:
+                if self.config.TimeLimit != 0.0 and currentTime > self.config.TimeLimit:
                     kill(proc.pid)
-                    raise TimeLimitExceededException
-                if get_outfile_size(self.config.OutputFilePath) >= self.config.output_file_size_limit * 1024:
+                    raise TimeLimitExceededException()
+                if self.check_for_outfile_usage() and get_outfile_size(self.config.OutputFilePath) >= self.config.output_file_size_limit * 1024:
                     kill(proc.pid)
                     raise OutputFileTooLargeException
             except psutil.NoSuchProcess:
                 break
+            except KeyboardInterrupt:
+                kill(proc.pid)
+                raise KeyboardInterrupt
             time.sleep(self.config.RunnerPollTime)
         if proc.poll() != 0:
             raise RuntimeErrorException
         return RunFileResult(run_time=currentTime, run_memory=MAX_RAM, run_returncode=proc.poll())
+
+    # def cleanup(self):

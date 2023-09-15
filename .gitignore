@@ -6,3 +6,6 @@ test.py
 
 #ignore the pycache
 *__pycache__
+
+#ignore test c++ files
+*.cpp*
