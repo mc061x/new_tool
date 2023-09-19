@@ -27,3 +27,11 @@ class DummyStruct:
             else:
                 result[attr] = value
         return result
+    
+    def get_printable_attrs(self) -> dict:
+        attrs = dict()
+        for attr_name in self.__dict__.keys():
+            attr = getattr(self, attr_name)
+            if type(attr) == int or type(attr) == str or type(attr) == float or type(attr) == list:
+                attrs[attr_name] = attr
+        return attrs

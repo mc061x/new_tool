@@ -1,0 +1,25 @@
+from config.generalCfg import GeneralConfig
+from text.command_list import COMMAND_LIST
+from handlers.handle_run import RunHandler 
+
+class MainHandler:
+    def __init__(self, cfg: GeneralConfig) -> None:
+        self.cfg = cfg
+    
+    def handle(self, command: str) -> None:
+        command = command.strip()
+        if command == '':
+            return
+        words = command.split()
+
+        if words[0] not in COMMAND_LIST:
+            print(self.cfg.interfaceCfg.error(f'Unknown command: {command}'))
+            return
+        
+
+        if words[0] == 'run':
+            handler = RunHandler(cfg=self.cfg)
+            handler.handle_run(words)
+            
+        if words[0] == 'cfg':
+            

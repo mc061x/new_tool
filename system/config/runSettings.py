@@ -4,21 +4,22 @@ from system.structures.configStruct import ConfigStruct
 class RunSettings(ConfigStruct):
     def __init__(self) -> None:
         super().__init__()
-        self.TimeLimit = 2.0
-        self.MemoryLimit = 256 * 1024
+        self.buildErrorLines = 10
+        self.time_limit = 2.0
+        self.memory_limit = 256 * 1024
         self.output_file_size_limit = 16 * 1024
-        self.InputFilePath = ''
-        self.OutputFilePath = ''
+        self.input_file_path = ''
+        self.output_file_path = ''
 
-        self.BuildCommand = f'g++ $FILENAME'
-        self.BuildArgs = '-std=c++20 -fdiagnostics-color=always -fmax-errors=2 -o $FILENAME.out'
+        self.build_command = f'g++ $FILENAME'
+        self.build_args = '-std=c++20 -fdiagnostics-color=always -fmax-errors=2 -o $FILENAME.out'
 
-        self.RunCommand = f'./$FILENAME.out'
-        self.RunArgs = ''
+        self.run_command = f'./$FILENAME.out'
+        self.run_args = ''
 
-        self.CleanupCommand = f'rm $FILENAME.out'
+        self.cleanup_command = f'rm $FILENAME.out'
 
-        self.RunnerPollTime = 0.05
+        self.runner_poll_time = 0.05
     
     def format_commands(self, pattern_old: str, pattern_new: str) -> None:
         old_dict: dict = self.__dict__
@@ -29,7 +30,7 @@ class RunSettings(ConfigStruct):
             setattr(self, key, old_instance.replace(pattern_old, pattern_new))
     
     def format_run_command(self):
-        if self.InputFilePath != '':
-            self.RunCommand += f'< {self.InputFilePath}'
-        if self.OutputFilePath != '':
-            self.RunCommand += f'> {self.OutputFilePath}'
+        if self.input_file_path != '':
+            self.run_command += f'< {self.input_file_path}'
+        if self.output_file_path != '':
+            self.run_command += f'> {self.output_file_path}'

@@ -1,3 +1,11 @@
+import colorama
+from colorama import Fore
+
+
+def handle_exception(format_func, E: Exception):
+    print(f'{format_func(E.__str__())}')
+
+
 class TimeLimitExceededException(Exception):
     """Called when the program exceeded the configured time limit"""
 
@@ -65,7 +73,7 @@ class WrongAttributeTypeException(Exception):
     """Called when user tries to modify an attribute, but the new value's type is incorrect"""
 
     def __init__(self, *args: object):
-        super.__init__(*args)
+        super().__init__(*args)
 
 
 class FileNotFoundException(Exception):
@@ -74,11 +82,13 @@ class FileNotFoundException(Exception):
     def __init__(self, *args: object):
         super().__init__(*args)
 
+
 class OutputFileTooLargeException(Exception):
-    """Called when the output file exceeded the set limit"""
+    """Called when the output file size exceeded the set limit"""
 
     def __init__(self, *args: object) -> None:
         super().__init__(*args)
+
 
 class ConfigNotFoundException(Exception):
     """Called when user tries to access an undefined config option"""
@@ -86,8 +96,15 @@ class ConfigNotFoundException(Exception):
     def __init__(self, *args: object) -> None:
         super().__init__(*args)
 
+
 class CannotLeaveEmptyConfigListException(Exception):
     """Called when user tries to delete last config option"""
+
+    def __init__(self, *args: object) -> None:
+        super().__init__(*args)
+
+class InvalidAttributeValue(Exception):
+    """Called when the new config attribute value is invalid"""
 
     def __init__(self, *args: object) -> None:
         super().__init__(*args)

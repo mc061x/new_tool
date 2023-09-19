@@ -1,0 +1,65 @@
+{
+  "interfaceCfg": {
+    "text_color": "\u001b[37m",
+    "text_background": "\u001b[49m",
+    "success_color": "\u001b[32m",
+    "success_background": "\u001b[49m",
+    "error_color": "\u001b[31m",
+    "error_background": "\u001b[49m",
+    "system_color": "\u001b[36m",
+    "system_background": "\u001b[49m",
+    "highlight_files": true,
+    "command_color": "SpringGreen",
+    "file_color": "OrangeRed",
+    "regular_color": "Wheat"
+  },
+  "cfConfig": {
+    "handle": "",
+    "friend_handles": [],
+    "current_contest": 0,
+    "current_problem": ""
+  },
+  "apiConfig": {
+    "key": "",
+    "secret": "",
+    "timeout": 10
+  },
+  "runCfg": {
+    "runOptionList": [
+      {
+        "alias": "main",
+        "option": {
+          "buildErrorLines": 10,
+          "time_limit": 3.0,
+          "memory_limit": 262144,
+          "output_file_size_limit": 16384,
+          "input_file_path": "/home/illia/Desktop/CP/files/input.txt",
+          "output_file_path": "",
+          "build_command": "g++ $FILENAME",
+          "build_args": "-std=c++20 -fdiagnostics-color=always -fmax-errors=2 -o $FILENAME.out",
+          "run_command": "./$FILENAME.out",
+          "run_args": "",
+          "cleanup_command": "rm $FILENAME.out",
+          "runner_poll_time": 0.05
+        }
+      }
+    ],
+    "currentRunOption": {
+      "buildErrorLines": 10,
+      "time_limit": 3.0,
+      "memory_limit": 262144,
+      "output_file_size_limit": 16384,
+      "input_file_path": "/home/illia/Desktop/CP/files/input.txt",
+      "output_file_path": "",
+      "build_command": "g++ $FILENAME",
+      "build_args": "-std=c++20 -fdiagnostics-color=always -fmax-errors=2 -o $FILENAME.out",
+      "run_command": "./$FILENAME.out",
+      "run_args": "",
+      "cleanup_command": "rm $FILENAME.out",
+      "runner_poll_time": 0.05
+    },
+    "currentRunAlias": "main"
+  },
+  "unix": true,
+  "directory": "/home/illia/Desktop/CP/new_tool"
+}

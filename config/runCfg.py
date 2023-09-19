@@ -11,12 +11,12 @@ def check_for_alias(alias: str, cfg_list: MyList) -> None:
     for option in cfg_list.list:
         if option.alias == alias:
             return
-    raise ConfigNotFoundException
+    raise ConfigNotFoundException(f'Config with alias {alias} not found')
 
 
 def check_for_last_config(cfg_list: MyList) -> None:
     if len(cfg_list.list) == 1:
-        raise CannotLeaveEmptyConfigListException
+        raise CannotLeaveEmptyConfigListException(f'Cannot remove the last config')
 
 
 def find_option(alias: str, cfg_list: MyList) -> RunConfigOption:
@@ -45,11 +45,12 @@ class RunCfg(ConfigStruct):
                 deepcopy(RunConfigOption(alias=new_alias, configOption=current_option.option)))
 
         else:
-            self.runOptionList.list.append(deepcopy(RunConfigOption(alias=new_alias, configOption=RunSettings())))
+            self.runOptionList.list.append(deepcopy(RunConfigOption(alias=new_alias, runSettings=RunSettings())))
 
-    def remove_run_config(self, alias: str):
+    def remove_run_config(self, alias: str, checkForLast: bool = True):
         check_for_alias(alias=alias, cfg_list=self.runOptionList)
-        check_for_last_config(cfg_list=self.runOptionList)
+        if checkForLast:
+            check_for_last_config(cfg_list=self.runOptionList)
 
         current_option = find_option(alias=alias, cfg_list=self.runOptionList)
         self.runOptionList.list.remove(current_option)
@@ -60,11 +61,12 @@ class RunCfg(ConfigStruct):
             self.currentRunAlias = first_option.alias
             self.currentRunOption = first_option.option
 
-    def modify_run_config(self, alias: str, attr: str, new_value: str):
-        check_for_alias(alias=alias, cfg_list=self.runOptionList)
+    def change_run_config(self, alias: str, newCfg: RunSettings):
+        self.remove_run_config(alias=alias, checkForLast=False)
+        self.runOptionList.list.append(
+            deepcopy(RunConfigOption(alias=alias, runSettings=newCfg))
+        )
 
-        current_option = find_option(alias=alias, cfg_list=self.runOptionList)
-        current_option.option.change_attribute(attr, new_value)
-
-        if current_option.alias == self.currentRunAlias:
-            self.currentRunOption.change_attribute(attr, new_value)
+        if alias == self.currentRunAlias:
+            self.currentRunOption = deepcopy(newCfg)
+        
