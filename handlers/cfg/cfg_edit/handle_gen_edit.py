@@ -15,5 +15,7 @@ def check_changes(new: GeneralConfig) -> bool:
 
 class GeneralCfgModifier:
     def handle(cfg: GeneralConfig):
-        cfg = modify_cfg(cfg, cfg.interfaceCfg, check_changes)
+        result = modify_cfg(cfg, cfg.interfaceCfg, check_changes)
+        if result != None:
+            cfg=result
         dump_config(cfg)

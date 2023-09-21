@@ -2,6 +2,10 @@ from text.bindings import add_autocomplete_binding
 from text.command_list import COMMAND_LIST
 from text.lexer import LexerWrapper, MyLexer
 from text.suggestor import MySuggsetor
+import colorama
+
+BOLD = '\033[1m'
+RESET_BOLD = '\033[0m'
 
 from prompt_toolkit.key_binding import KeyBindings
 from prompt_toolkit import PromptSession, ANSI
@@ -24,7 +28,7 @@ class TextWrapper:
             lexer=self.lexer
         )
 
-        self.prompt = cfg.interfaceCfg.system('$') + cfg.interfaceCfg.system(cfg.cfConfig.handle) + '> '
+        self.prompt = BOLD + cfg.interfaceCfg.system('$') + cfg.interfaceCfg.system(cfg.cfConfig.handle) + '> ' + RESET_BOLD
 
     def get_command(self):
         text = self.session.prompt(ANSI(self.prompt), lexer=self.lexer)

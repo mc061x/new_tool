@@ -1,6 +1,7 @@
 from config.generalCfg import GeneralConfig
 from text.command_list import COMMAND_LIST
 from handlers.handle_run import RunHandler 
+from handlers.handle_cfg import CfgHandler
 
 class MainHandler:
     def __init__(self, cfg: GeneralConfig) -> None:
@@ -22,4 +23,5 @@ class MainHandler:
             handler.handle_run(words)
             
         if words[0] == 'cfg':
-            
+            handler = CfgHandler(cfg=self.cfg)
+            handler.handle(words)

@@ -8,5 +8,6 @@ COMMAND_LIST = [
     'cfg run edit',
     'cfg run sel',
     'run',
-    'quit'
+    'quit',
+    'os'
 ]

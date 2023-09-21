@@ -15,4 +15,4 @@ while True:
 
     handler.handle(command)
     
-    dump_config(cfg=cfg)
+    cfg = get_cfg()
