@@ -22,5 +22,3 @@ class Requester:
     def rating(self, args: dict) -> RatingResult:
         return RatingResult(self.api.request(method='user.rating?', args=args))
 
-    def to_dict(self, json: dict):
-        pass

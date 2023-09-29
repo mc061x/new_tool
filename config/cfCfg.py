@@ -1,4 +1,5 @@
 from system.structures.configStruct import ConfigStruct
+from codeforces.contest.contestStruct import ContestData
 
 
 class CfConfig(ConfigStruct):
@@ -7,7 +8,6 @@ class CfConfig(ConfigStruct):
         self.handle = str()
         self.friend_handles = list()
 
-        self.current_contest = int()
-        self.current_problem = str()
+        self.current_contest = ContestData()
 
         

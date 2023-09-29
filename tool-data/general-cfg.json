@@ -30,32 +30,32 @@
         "alias": "main",
         "option": {
           "buildErrorLines": 10,
-          "time_limit": 0.001,
+          "time_limit": 2.0,
           "memory_limit": 262144,
           "output_file_size_limit": 16384,
           "input_file_path": "",
-          "output_file_path": "/home/illia/Desktop/CP/new_tool/logs/log.txt",
+          "output_file_path": "",
           "build_command": "g++ $FILENAME",
           "build_args": "-std=c++20 -fdiagnostics-color=always -fmax-errors=2 -o $FILENAME.out",
-          "run_command": "./$FILENAME.out",
+          "run_command": "/$FILENAME.out",
           "run_args": "",
-          "cleanup_command": "rm -f $FILENAME.out",
+          "cleanup_command": "rm $FILENAME.out",
           "runner_poll_time": 0.05
         }
       }
     ],
     "currentRunOption": {
       "buildErrorLines": 10,
-      "time_limit": 0.001,
+      "time_limit": 2.0,
       "memory_limit": 262144,
       "output_file_size_limit": 16384,
       "input_file_path": "",
-      "output_file_path": "/home/illia/Desktop/CP/new_tool/logs/log.txt",
+      "output_file_path": "",
       "build_command": "g++ $FILENAME",
       "build_args": "-std=c++20 -fdiagnostics-color=always -fmax-errors=2 -o $FILENAME.out",
-      "run_command": "./$FILENAME.out",
+      "run_command": "/$FILENAME.out",
       "run_args": "",
-      "cleanup_command": "rm -f $FILENAME.out",
+      "cleanup_command": "rm $FILENAME.out",
       "runner_poll_time": 0.05
     },
     "currentRunAlias": "main"

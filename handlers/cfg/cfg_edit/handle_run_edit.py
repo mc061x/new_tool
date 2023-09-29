@@ -39,6 +39,7 @@ class RunCfgModifier:
             check_for_alias(alias=alias, cfg_list=self.cfg.runCfg.runOptionList)
         except ConfigNotFoundException as exc:
             handle_exception(self.cfg.interfaceCfg.error, exc)
+            return
 
         current_option = find_option(alias=alias, cfg_list=cfg.runCfg.runOptionList).option
         current_option = modify_cfg(current_option, cfg.interfaceCfg, check_changes)

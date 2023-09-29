@@ -14,7 +14,7 @@ class RunSettings(ConfigStruct):
         self.build_command = f'g++ $FILENAME'
         self.build_args = '-std=c++20 -fdiagnostics-color=always -fmax-errors=2 -o $FILENAME.out'
 
-        self.run_command = f'./$FILENAME.out'
+        self.run_command = f'/$FILENAME.out'
         self.run_args = ''
 
         self.cleanup_command = f'rm $FILENAME.out'

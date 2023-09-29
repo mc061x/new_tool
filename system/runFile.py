@@ -1,5 +1,6 @@
 import subprocess, time, psutil, os, colorama
 
+from copy import deepcopy
 from exceptions import *
 from system.config.runSettings import RunSettings
 from system.structures.runFileResult import RunFileResult
@@ -36,7 +37,7 @@ def format_err_lines(lines: list):
 
 class FileRunner:
     def __init__(self, cfg: RunSettings, file_path: str) -> None:
-        self.config = cfg
+        self.config = deepcopy(cfg)
         self.config.format_commands('$FILENAME', file_path)
         self.config.format_run_command()
         self.path_to_file = file_path

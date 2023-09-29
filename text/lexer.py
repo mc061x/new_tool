@@ -20,9 +20,12 @@ class LexerWrapper:
                     cols[occ+j] = self.cfg.interfaceCfg.command_color
 
     def color_files(self, current_command: str, cols: list):
-        for file in os.listdir(path=self.cfg.directory):
-            if not os.path.isfile(os.path.join(self.cfg.directory, file)): continue
-
+        files_in_command = list()
+        for j in current_command.split():
+            current_path = os.path.join(self.cfg.directory, j)
+            if os.path.exists(current_path) and os.path.isfile(current_path):
+                files_in_command.append(j)
+        for file in files_in_command:
             occurences = [m.start() for m in finditer(file, current_command)]
             for occ in occurences:
                 for j in range(len(file)):
